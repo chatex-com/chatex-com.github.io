@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatex API / Chatex Pay</title>
+    <style>
+        body {padding: 20px; max-width: 820px; margin: 20px auto; font: 15px arial, sans-serif; color: #111; line-height: 1.4;}
+        a {color: #1a73e8; text-decoration: none;}
+        a:hover {color: #1a73e8; text-decoration: underline;}
+        ul li {margin-bottom: 8px;}
+        h2 {padding-top: 20px;}
+        h2 small {font-size: 0.6em}
+        h3 {padding-top: 12px;}
+        h4 {padding-top: 8px; margin-bottom: 0;}
+        h4 + pre {margin-top: 0;}
+        .muted { color: #888; }
+        .label { background-color: #656565; display: inline-block; padding: 0 5px; border-radius: 0.2em; color: white; font-size: 0.8em; vertical-align: text-bottom; }
+        .code { background-color: rgba(38, 50, 56, 0.05); display: inline-block; padding: 0 5px; border: 1px solid rgba(38, 50, 56, 0.1); border-radius: 0.2em; color: rgb(229, 57, 53); font-size: 0.9em; font-family: monospace; vertical-align: bottom; }
+    </style>
+</head>
+<body>
+<h2>HowTo: Making Requests<br><small><a href="../">← back</a></small></h2>
+
+<p>The majority part of requests should contain authorization header. It should be passed in these requests in the <span class="code">Authorization</span> header in the bearer format: <span class="code">Bearer YOUR_TOKEN</span>.</p>
+
+<p>Currently, we have 2 kind of tokens:</p>
+
+<ul>
+    <li><b>Refresh Token</b><br>
+        This kind of token is used for generating access token and revoking current token endpoints only.<br>
+        It will expire in one case only: if you don't use it for a while.</li>
+    <li><b>Access Token</b><br>
+        This token is used for the majority requests in our API except endpoints which were described on previous step.</li>
+</ul>
+
+We use <a href="https://jwt.io" target="_blank">JWT</a> format for our tokens.
+
+<h3>Getting a Refresh Token</h3>
+
+<p>You have to go to the section <b>Profile → Settings → Chatex API</b> in the <a href="https://t.me/Chatex_bot">@chatex_bot</a>.</p>
+
+<img src="making-requests/chatex-api.png" alt="" width="424">
+
+<h3>Retrieve an Access Token</h3>
+
+<p><b>Important:</b> Access token has an expiration in 1 hour.</p>
+
+<pre>
+curl --request POST 'https://api.chatex.com/v1/auth/access-token' \
+  --header 'Authorization: Bearer YOUR_REFRESH_TOKEN'
+</pre>
+
+<a href="https://api.chatex.com/v1/specification/index.html#/Profile/post_auth_access_token" target="_blank">See endpoint details</a>.
+
+</body>
+</html>
